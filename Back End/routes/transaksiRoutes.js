@@ -1,8 +1,10 @@
+// transaksiRoutes.js
 const express = require('express');
 const router = express.Router();
 const transaksiController = require('../controllers/transaksiController');
+const { auth } = require('../middleware/indexMiddleware');
 
-router.get('/', transaksiController.getAllTransactions);
-router.post('/checkout', transaksiController.handleCheckout);
+// Definisikan rute untuk membuat transaksi
+router.post('/create', auth, transaksiController.checkoutProductController);
 
 module.exports = router;

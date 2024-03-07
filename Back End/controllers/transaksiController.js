@@ -1,20 +1,17 @@
-const transaksiService = require('../services/transaksiService');
+const transaksiService = require("../services/transaksiService");
 
-exports.getAllTransactions = async (req, res) => {
-  try {
-    const transactions = await transaksiService.getAllTransactions();
-    res.json(transactions);
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-};
-
-exports.handleCheckout = async (req, res) => {
-  try {
-    const { id_pembeli, id_menu, jumlah } = req.body;
-    const transaksi = await transaksiService.checkout(id_pembeli, id_menu, jumlah);
-    res.json(transaksi);
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-};
+exports.checkoutProductController = async (req, res) => {
+    const { id, jumlah } = req.body; // Ambil id dan jumlah dari body request
+    const userId = req.userId; // asumsikan userId sudah di-set oleh middleware autentikasi
+  
+    const dataTransaksi = {
+      userId,
+      id,
+      jumlah
+    };
+  
+    const result = await transaksiService.createCheckoutTransaction(dataTransaksi);
+  
+    return res.status(result.status).json(result);
+  };
+  

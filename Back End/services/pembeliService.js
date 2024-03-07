@@ -1,15 +1,26 @@
 const { Pembeli } = require('../models');
 const { Sequelize } = require('sequelize');
+const { hashPassword } = require('../bcrypt/bcrypt');
 
 class PembeliService {
   static async addPembeli({ nama, email, password, noTelp }) {
     try {
-      const newPembeli = await Pembeli.create({ nama, email, password, noTelp });
+      const hashedPassword = await hashPassword(password); // Hash password sebelum disimpan
+      const newPembeli = await Pembeli.create({ nama, email, password: hashedPassword, noTelp });
       return newPembeli.toJSON();
     } catch (error) {
       throw error;
     }
   }
+  
+  // static async addPembeli({ nama, email, password, noTelp }) {
+  //   try {
+  //     const newPembeli = await Pembeli.create({ nama, email, password, noTelp });
+  //     return newPembeli.toJSON();
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
   static async getAllPembeli() {
     try {

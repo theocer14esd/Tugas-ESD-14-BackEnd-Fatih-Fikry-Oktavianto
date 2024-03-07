@@ -14,6 +14,19 @@ class PembeliController {
       res.status(400).json({ message: error.message });
     }
   }
+  
+  // static async addPembeli(req, res) {
+  //   const { error } = validateAddPembeli(req.body);
+  //   if (error) return res.status(400).send(error.details[0].message);
+  
+  //   try {
+  //     const { nama, email, password, noTelp } = req.body;
+  //     const pembeli = await PembeliService.addPembeli({ nama, email, password, noTelp });
+  //     res.status(201).json(pembeli);
+  //   } catch (error) {
+  //     res.status(400).json({ message: error.message });
+  //   }
+  // }
 
   static async getAllPembeli(req, res) {
     try {
