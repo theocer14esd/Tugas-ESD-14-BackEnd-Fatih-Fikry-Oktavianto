@@ -1,6 +1,6 @@
 const { Pembeli } = require('../models');
 const { Sequelize } = require('sequelize');
-const { hashPassword } = require('../bcrypt/bcrypt');
+const { hashPassword } = require('../helpers/bcrypt');
 
 class PembeliService {
   static async addPembeli({ nama, email, password, noTelp }) {
