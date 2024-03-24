@@ -6,5 +6,6 @@ const { auth } = require('../middleware/indexMiddleware');
 
 // Definisikan rute untuk membuat transaksi
 router.post('/create', auth, transaksiController.checkoutProductController);
+router.post('/notification', transaksiController.handleMidtransNotificationController);
 
 module.exports = router;
